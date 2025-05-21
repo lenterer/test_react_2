@@ -9,7 +9,7 @@ const socketConnection = userName =>{
     }else{
         //its not connected... connect!
         //socket = io.connect('http://localhost:8181',{
-        socket = io.connect('https://192.168.255.5:8181',{
+        socket = io.connect('server-rtc-production.up.railway.app',{
             auth: {
                 // jwt,
                 password: "x",
