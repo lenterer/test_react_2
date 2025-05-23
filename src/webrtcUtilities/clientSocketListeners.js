@@ -3,10 +3,11 @@ const clientSocketListeners = (socket,typeOfCall,callStatus,
     updateCallStatus,peerConnection)=>{
     socket.on('answerResponse',entireOfferObj=>{
         console.log(entireOfferObj);
-        const copyCallStatus = {...callStatus}
-        copyCallStatus.answer = entireOfferObj.answer
-        copyCallStatus.myRole = typeOfCall
-        updateCallStatus(copyCallStatus)
+        updateCallStatus(prev => ({
+            ...prev,
+            answer: entireOfferObj.answer,
+            myRole: typeOfCall
+        }))
     })
 
     socket.on('receivedIceCandidateFromServer',iceC=>{
