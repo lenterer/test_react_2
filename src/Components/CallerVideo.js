@@ -70,8 +70,7 @@ const CallerVideo = ({remoteStream, localStream,peerConnection,callStatus,update
             console.log(peerConnection.signalingState)
             console.log("Answer added!")
         }
-        if(callStatus.answer){
-            console.log("TES TES")
+        if(callStatus.answer && peerConnection.signalingState !== 'stable'){
             addAnswerAsync()
         }
     },[callStatus])
