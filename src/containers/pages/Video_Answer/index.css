@@ -1,0 +1,228 @@
+.videos {
+    position: relative; /* changed from absolute */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* center vertically */
+    background-color: #f5f6fa; /* optional: to frame the videos */
+}
+
+/* Remote video: normal size and centered */
+#remote-feed {
+    width: 640px;    /* or 60%, or any desired width */
+    height: 360px;   /* maintain 16:9 aspect ratio */
+    background-color: black;
+    z-index: 1;
+    object-fit: contain;
+}
+
+/* Local video: small overlay in corner */
+#local-feed {
+    position: absolute;
+    z-index: 2;
+    right: 5%;
+    bottom: 10%;
+    width: 150px;
+    height: auto;
+    border: 2px solid white;
+    border-radius: 4px;
+    object-fit: cover;
+}
+
+.call-info{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 1px solid #cacaca;
+    background-color: #222;
+    padding: 10px;
+    z-index: 5;
+}
+    
+.call-info h1{
+    color: white;
+}
+    
+#menu-buttons {
+    position: absolute;
+    top: calc(50% + 200px);
+    left: 50%;
+    transform: translateX(-50%);
+    width: 640px;
+    height: 60px;
+    background-color: rgba(51, 51, 51, 0.9);
+    border-radius: 10px;
+    z-index: 5;
+    display: flex;
+    justify-content: space-between;
+    align-items: center; /* vertically center buttons */
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+/* Override Bootstrap styles inside the menu */
+#menu-buttons .custom-btn {
+    height: 40px;
+    padding: 0 16px;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    white-space: nowrap;
+    border: none;
+    cursor: pointer;
+    box-sizing: border-box;
+}
+
+#menu-buttons .custom-btn-danger {
+    background-color: #dc3545;
+    color: white;
+}
+
+#menu-buttons .custom-btn-danger:hover {
+    background-color: #c82333;
+}
+
+.button.camera, /* add your audio button selector too, e.g., .button.audio */
+.button.mic {
+  width: 60px;       /* fixed width */
+  height: 60px;      /* fixed height */
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border-radius: 6px;
+  background-color: transparent; /* or your button bg */
+  color: white;
+  user-select: none;
+}
+
+.button.camera i,
+.button.mic i {
+  font-size: 24px;
+}
+
+#menu-buttons .hang-up {
+    margin: 0;
+    height: 40px;
+    padding: 0 20px;
+    font-size: 14px;
+    display: flex;
+    align-items: center; /* vertical center */
+    justify-content: center;
+    border-radius: 6px;
+    white-space: nowrap;
+    line-height: 1;
+    background-color: #dc3545;
+    border: none;
+    color: white;
+    cursor: pointer;
+}
+  
+#menu-buttons .left,
+#menu-buttons .right {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+#menu-buttons .fa {
+    font-size: 20px;
+    color: white; /* set icon color to white */
+}
+
+.button-wrapper, .button {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: none;
+    border: none;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: background-color 0.2s ease;
+}
+
+.button-wrapper {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 60px;
+}
+
+.button-wrapper i.fa-caret-up.choose-audio,
+.button-wrapper i.fa-caret-up.choose-video {
+    position: absolute;
+    top: -3px;         /* same height above the button */
+    left: 90%;          /* center horizontally */
+    transform: translateX(-50%);
+    font-size: 16px;
+    color: white;
+    z-index: 10;
+    cursor: pointer;
+    padding: 4px;
+    background-color: transparent;
+}
+
+.button:hover{
+    position: relative;
+    background-color: #555;
+    cursor: pointer;
+}
+
+.button-wrapper i {
+    font-size: 24px;
+    color: white;
+    position: absolute;
+    left: 18px;
+    top: 15px;
+}
+
+.btn-text {
+    font-size: 12px;
+    bottom: 6px;
+    color: white;
+    text-align: center;
+    position: absolute;
+    width: 100%;
+}
+
+.button-wrapper i.fa-caret-up{
+    left: 75px;
+    top: 0px;
+    z-index: 100000;
+    padding: 5px;
+}
+
+.button-wrapper i.fa-caret-up:hover{
+    background-color: #555;
+    cursor: pointer;
+}
+
+.video-menu-dropdown {
+    position: absolute;
+    bottom: 100%;
+    margin-bottom: 8px;
+    background-color: white;
+    border: 1px solid #ccc;
+    padding: 8px;
+    z-index: 10;
+    border-radius: 6px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    font-size: 14px; /* 👈 Change this for font size */
+    min-width: 160px;
+}
+
+.video-menu-dropdown div {
+    padding: 4px 8px;
+    cursor: pointer;
+}
+
+.video-menu-dropdown div:hover {
+    background-color: #f0f0f0;
+}

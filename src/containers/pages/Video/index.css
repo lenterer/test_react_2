@@ -1,0 +1,40 @@
+
+body {
+    background-color: #f5f6fa;
+}
+
+/* Center the container */
+.container {
+    margin: 0 auto;
+    padding: 40px 20px;
+    max-width: 1000px;
+    text-align: center; /* <-- This centers all text inside */
+    background-color: #f5f6fa;
+}
+
+/* Ensure row uses flex layout */
+.row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+/* Make both columns occupy 50% of the row */
+.custom-col {
+    flex: 1 1 48%; /* 48% to leave room for the gap */
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+/* Optional: Center the title */
+h1 {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.username-input {
+  max-width: 300px;
+}

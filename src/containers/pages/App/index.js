@@ -1,17 +1,30 @@
 import React from 'react';
 import logo from '../../../assets/img/logo/logo.svg';
-import './App.scss';
 import{ BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
-import Dashboard from '../Dashboard';
-import Login from '../Login';
-import Register from '../Register';
-import Model3D from '../3D_Model'
-import Video from '../Video'
+import { useState } from 'react';
 import { configureStore } from '@reduxjs/toolkit';
 import { Provider } from 'react-redux';
 import { store } from '../../../config/redux';
+import Dashboard from '../Dashboard';
+import Login from '../Login';
+import Register from '../Register';
+import Model3D from '../3D_Model';
+import Video from '../Video';
+import CallerVideo from '../Video_Caller';
+import AnswerVideo from '../Video_Answer';
+import './App.scss';
 
 function App()  {
+
+    //holds: callStatus, haveMedia, videoEnabled, audioEnabled, 
+    // haveOffer
+    const [ callStatus, updateCallStatus ] = useState({})
+    const [ localStream, setLocalStream ] = useState(null)
+    const [ remoteStream, setRemoteStream ] = useState(null)
+    const [ peerConnection, setPeerConnection ] = useState(null)
+    const [ userName, setUserName ] = useState("")
+    const [ offerData, setOfferData ] = useState(null)
+
     return(
         <Provider store={store}>
             <Router>
@@ -40,7 +53,49 @@ function App()  {
                         <Route path="/login" element={<Login />} />
                         <Route path="/register" element={<Register />} />
                         <Route path="/3dmodel" element={<Model3D />} />
-                        <Route path="/video" element={<Video />} />
+                        <Route exact path="/video" element={
+                            <Video 
+                                callStatus={callStatus} 
+                                updateCallStatus={updateCallStatus}
+                                localStream={localStream}
+                                setLocalStream={setLocalStream}
+                                remoteStream={remoteStream}
+                                setRemoteStream={setRemoteStream}
+                                peerConnection={peerConnection}
+                                setPeerConnection={setPeerConnection}
+                                userName={userName}
+                                setUserName={setUserName}
+                                offerData={offerData}
+                                setOfferData={setOfferData}
+                            />
+                            }/>
+                        <Route exact path="/offer" element={
+                            <CallerVideo 
+                                callStatus={callStatus} 
+                                updateCallStatus={updateCallStatus} 
+                                localStream={localStream}
+                                setLocalStream={setLocalStream}
+                                remoteStream={remoteStream}
+                                setRemoteStream={setRemoteStream}  
+                                peerConnection={peerConnection}
+                                userName={userName}
+                                setUserName={setUserName}            
+                            />} 
+                        />
+                        <Route exact path="/answer" element={
+                            <AnswerVideo 
+                                callStatus={callStatus} 
+                                updateCallStatus={updateCallStatus} 
+                                localStream={localStream}
+                                setLocalStream={setLocalStream}
+                                remoteStream={remoteStream}
+                                setRemoteStream={setRemoteStream}               
+                                peerConnection={peerConnection}
+                                userName={userName}
+                                setUserName={setUserName}
+                                offerData={offerData}
+                            />} 
+                        />
                     </Routes>
                 </div>
             </Router>
