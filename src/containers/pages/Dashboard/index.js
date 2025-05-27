@@ -128,71 +128,75 @@ const Dashboard = ({callStatus,updateCallStatus,setLocalStream,
 
     return (
         <div className="container">
-            {joined ? (
-                <div className="model-video">
-                    <h1>{userName}</h1>
-                    <div className="video-columns">
-                        <div className="custom-col">
-                        <h4>Make a call</h4>
-                        <button onClick={call} className="btn btn-success btn-sm">
-                            Start Call
-                        </button>
-                        </div>
-
-                        <div className="custom-col">
-                        <h4>Available Calls</h4>
-                        {availableCalls.map((callData, i) => (
-                            <div className="mb-2" key={i}>
-                            <button
-                                onClick={() => answer(callData)}
-                                className="btn btn-warning btn-sm w-100"
-                            >
-                                Answer {callData.offererUserName}
+            <h1 className="model-title">Robot Arm 3D Viewer</h1>
+            <p>Status: {connected ? 'Connected' : 'Disconnected'}</p>
+            <div className='row-content'>
+                {joined ? (
+                    <div className="model-video">
+                        <h1>{userName}</h1>
+                        <div className="video-columns">
+                            <div className="custom-col">
+                            <h4>Make a call</h4>
+                            <button onClick={call} className="btn btn-success btn-sm">
+                                Start Call
                             </button>
                             </div>
-                        ))}
-                        </div>
 
+                            <div className="custom-col">
+                            <h4>Available Calls</h4>
+                            {availableCalls.map((callData, i) => (
+                                <div className="mb-2" key={i}>
+                                <button
+                                    onClick={() => answer(callData)}
+                                    className="btn btn-warning btn-sm w-100"
+                                >
+                                    Answer {callData.offererUserName}
+                                </button>
+                                </div>
+                            ))}
+                            </div>
+
+                        </div>
                     </div>
-                </div>
-            ) : (
-                <div className="model-video">
-                    <input
-                        type="text"
-                        className="form-control mb-3 username-input"
-                        placeholder="Enter your username"
-                        value={userName}
-                        onChange={(e) => setUserName(e.target.value)}
-                    />
-                    <button onClick={() => setJoined(true)} className="btn btn-primary btn-lg">
-                        Join
-                    </button>
-                </div>
-            )}
+                ) : (
+                    <div className="model-video">
+                        <input
+                            type="text"
+                            className="form-control mb-3 username-input"
+                            placeholder="Enter your username"
+                            value={userName}
+                            onChange={(e) => setUserName(e.target.value)}
+                        />
+                        <button onClick={() => setJoined(true)} className="btn btn-primary btn-lg">
+                            Join
+                        </button>
+                    </div>
+                )}
 
-            {/* Kolom kanan */}
-            <div className="model-right">
-                <div className="model-canvas">
-                    <Canvas camera={{ position: [0, 1, 5], fov: 45 }}>
-                    <ambientLight intensity={0.5} />
-                    <directionalLight position={[5, 5, 5]} />
-                    <Model rotationData={message} />
-                    <OrbitControls />
-                    </Canvas>
-                </div>
+                {/* Kolom kanan */}
+                <div className="model-right">
+                    <div className="model-canvas">
+                        <Canvas camera={{ position: [0, 1, 5], fov: 45 }}>
+                        <ambientLight intensity={0.5} />
+                        <directionalLight position={[5, 5, 5]} />
+                        <Model rotationData={message} />
+                        <OrbitControls />
+                        </Canvas>
+                    </div>
 
-                <div className="model-info">
-                    <h2>Informasi Bagian</h2>
-                    <div className="model-info-grid">
-                        <div className="info-row">
-                            <p>Base 1 : {bone.Bone001}°</p>
-                            <p>Base 2 : {bone.Bone002}°</p>
-                            <p>Base 3 : {bone.Bone003}°</p>
-                        </div>
-                        <div className="info-row">
-                            <p>Base 4 : {bone.Bone004}°</p>
-                            <p>Base 5 : {bone.Bone005}°</p>
-                            <p>Base 6 : {bone.Bone006}°</p>
+                    <div className="model-info">
+                        <h2>Informasi Bagian</h2>
+                        <div className="model-info-grid">
+                            <div className="info-row">
+                                <p>Base 1 : {bone.Bone001}°</p>
+                                <p>Base 2 : {bone.Bone002}°</p>
+                                <p>Base 3 : {bone.Bone003}°</p>
+                            </div>
+                            <div className="info-row">
+                                <p>Base 4 : {bone.Bone004}°</p>
+                                <p>Base 5 : {bone.Bone005}°</p>
+                                <p>Base 6 : {bone.Bone006}°</p>
+                            </div>
                         </div>
                     </div>
                 </div>

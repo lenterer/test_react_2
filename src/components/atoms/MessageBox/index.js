@@ -1,6 +1,6 @@
 const VideoMessage = ({message}) => {
     if(message){
-        return <div className="call-info"> <h1>{message}</h1></div>
+        return <div className="call-info"> <h4>{message}</h4></div>
     } else{
         return <></>
     }
