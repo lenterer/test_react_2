@@ -4,7 +4,7 @@ import socketConnection from '../../../config/webrtcUtilities/socketConnection';
 import ActionButtons from '../../../components/atoms/ActionButtons/ActionButtons';
 import VideoMessageBox from '../../../components/atoms/MessageBox';
 import { markRemoteDescSet } from '../../../config/webrtcUtilities/peerState'
-import './index.css';
+import '../Video_Answer/index.css';
 
 const CallerVideo = ({remoteStream, localStream,peerConnection,callStatus,updateCallStatus,userName})=>{
     const remoteFeedEl = useRef(null); //this is a React ref to a dom element, so we can interact with it the React way
