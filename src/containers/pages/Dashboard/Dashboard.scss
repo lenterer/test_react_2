@@ -1,66 +1,81 @@
-.dashboard-page {
-    min-height: 100vh;
-    background-color: #f5f6fa;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    padding: 20px;
+/* Container utama */
+.container {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  height: 100%; /* Untuk memastikan tinggi anak bisa proporsional */
 }
 
-.mqtt-box {
-    display: flex;
-    gap: 40px;
-    margin-top: 30px;
-    width: 100%;
-    max-width: 800px;
-    justify-content: center;
+/* Kolom kiri dan kanan */
+.model-video,
+.model-right {
+  flex: 1;
+  min-width: 500px;
+  height: 700px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 20px;
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.mqtt-column {
-    background-color: white;
-    padding: 20px;
-    border-radius: 12px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-    flex: 1;
-    display: flex;
-    flex-direction: column;
+/* Model canvas mengikuti tinggi proporsional */
+.model-canvas {
+  flex: 1;
+  min-height: 0; /* Penting untuk mencegah overflow */
+  border: 2px solid #999;
+  border-radius: 10px;
+  background-color: #f0f0f0;
+  margin-bottom: 20px;
 }
 
-.incoming-box {
-    background-color: #f1f2f6;
-    padding: 15px;
-    border-radius: 8px;
-    min-height: 100px;
-    word-wrap: break-word;
-    margin-top: 10px;
+/* Informasi model */
+.model-info {
+  padding: 10px;
+  background-color: #f8f9fa;
+  border-radius: 10px;
 }
 
-.mqtt-input {
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    margin-top: 10px;
+.model-video {
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Vertikal center */
+  align-items: center;     /* Horizontal center */          /* Pastikan box tinggi penuh */
 }
 
-.mqtt-button {
-    margin-top: 10px;
-    padding: 10px;
-    border: none;
-    background-color: #2f80ed;
-    color: white;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
+.video-columns {
+  display: flex;
+  gap: 20px;
+  justify-content: space-between;
 }
 
-.mqtt-button:hover {
-    background-color: #1c63c3;
+.custom-col {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #f9f9f9;
 }
 
-.mqtt-button:disabled {
-    background-color: #ccc;
-    color: #777;
-    cursor: not-allowed;
-    opacity: 0.7;
+.btn-sm {
+  padding: 8px 16px;
+  font-size: 10px;
+}
+
+/* Tata info bagian */
+.model-info-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.info-row {
+  display: flex;
+  justify-content: space-between;
 }

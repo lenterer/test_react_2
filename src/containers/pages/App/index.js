@@ -49,7 +49,22 @@ function App()  {
                         </ul>
                     </nav>
                     <Routes>
-                        <Route path="/dashboard" element={<Dashboard />} />
+                        <Route path="/dashboard" element={
+                            <Dashboard 
+                                callStatus={callStatus} 
+                                updateCallStatus={updateCallStatus}
+                                localStream={localStream}
+                                setLocalStream={setLocalStream}
+                                remoteStream={remoteStream}
+                                setRemoteStream={setRemoteStream}
+                                peerConnection={peerConnection}
+                                setPeerConnection={setPeerConnection}
+                                userName={userName}
+                                setUserName={setUserName}
+                                offerData={offerData}
+                                setOfferData={setOfferData}
+                            />}
+                        />
                         <Route path="/login" element={<Login />} />
                         <Route path="/register" element={<Register />} />
                         <Route path="/3dmodel" element={<Model3D />} />
@@ -67,8 +82,8 @@ function App()  {
                                 setUserName={setUserName}
                                 offerData={offerData}
                                 setOfferData={setOfferData}
-                            />
-                            }/>
+                            />}
+                        />
                         <Route exact path="/offer" element={
                             <CallerVideo 
                                 callStatus={callStatus} 
