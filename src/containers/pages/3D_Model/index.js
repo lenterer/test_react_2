@@ -28,6 +28,7 @@ class Model3D extends Component {
     }
 
     componentDidMount(){
+        // TOPIC = test/ESP32
         mqttService.connect(
             this.handleMessage, 
             (status) => {
@@ -43,15 +44,25 @@ class Model3D extends Component {
     handleMessage = (topic, payload) => {
         const now = new Date();
         const timeMessage = now.toLocaleTimeString();
-        const [boneName, angleDeg] = payload.split(':');
 
-        this.setState((prevState) => ({
-            message: payload,
-            bone: {
-                ...prevState.bone,
-                [boneName]: angleDeg
-            },
-        }));
+        let [boneIndex, angleDeg] = payload.split(':');
+
+        // Pastikan boneIndex adalah angka antara 0 dan 6
+        if (boneIndex >= "0" && boneIndex <= "6") {
+            const boneName = `Bone00${boneIndex}`;
+            this.setState((prevState) => ({
+                message: payload,
+                bone: {
+                    ...prevState.bone,
+                    [boneName]: angleDeg
+                },
+                //message: `${boneName}:${angleDeg}`
+            }));
+        }else {
+            this.setState((prevState) => ({
+                message: payload,
+            }));
+        }
     };
 
     handleChange = (e) => {
