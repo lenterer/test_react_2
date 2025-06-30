@@ -56,12 +56,21 @@ const Dashboard = ({callStatus,updateCallStatus,setLocalStream,
         const now = new Date();
         const timeMessage = now.toLocaleTimeString();
         const [boneName, angleDeg] = payload.split(':');
+        const boneMap = {
+            '1': 'Bone001',
+            '2': 'Bone002',
+            '3': 'Bone003',
+            '4': 'Bone004',
+            '5': 'Bone005'
+        };
 
-        setMessage(payload);
-        setBone(prev => ({
-            ...prev,
-            [boneName]: angleDeg
-        }));
+        if (boneMap[boneName]) {
+            setMessage(`${boneMap[boneName]}:${angleDeg}`);
+            setBone(prev => ({
+                ...prev,
+                [boneMap[boneName]]: angleDeg
+            }));
+        }
     };
     
     //Test backend connection

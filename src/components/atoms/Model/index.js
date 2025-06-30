@@ -22,21 +22,21 @@ export default function Model({ scale = [0.7, 0.7, 0.7], rotationData }) {
 
     useEffect(() => {
         if (rotationData && bonesRef.current) {
-            const [boneName, angleDeg] = rotationData.split(':');
+            const [boneName, angleStr] = rotationData.split(':');
+            const angleRad = parseFloat(angleStr);
             const bone = bonesRef.current[boneName];
-            const degToRad = (angleDeg * Math.PI) / 180
             const rad = (deg) => (deg * Math.PI) / 180;
             if (bone) {
                 if(boneName === 'Bone001'){
-                    bone.rotation.y = 0 + degToRad;
+                    bone.rotation.y = rad(0) + angleRad;
                 }else if(boneName === 'Bone002'){
-                    bone.rotation.x = 0 + degToRad;
+                    bone.rotation.x = rad(0) + angleRad;
                 }else if(boneName === 'Bone003'){
-                    bone.rotation.z = rad(50) + degToRad;
+                    bone.rotation.z = rad(50) + angleRad;
                 }else if(boneName === 'Bone004'){
-                    bone.rotation.z = rad(90) + degToRad;
+                    bone.rotation.z = rad(90) + angleRad;
                 }else if(boneName === 'Bone005'){
-                    bone.rotation.z = rad(90) + degToRad;
+                    bone.rotation.z = rad(90) + angleRad;
                 }
             }
         }

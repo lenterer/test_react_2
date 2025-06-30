@@ -3,7 +3,7 @@ import mqtt from 'mqtt';
 
 // Ganti dengan kredensial dan URL milikmu
 const MQTT_BROKER = 'wss://abda57f3c12743db931e9bed3781aca3.s1.eu.hivemq.cloud:8884/mqtt';
-const MQTT_TOPIC = 'test/ESP32';
+const MQTT_TOPIC = 'pc/sensor';
 const username = 'Testing.Rippers';
 const password = 'Bismillah1';
 
