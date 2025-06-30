@@ -133,7 +133,7 @@ const AnswerVideo = ({remoteStream, localStream,peerConnection,
                     />
                 </div>
 
-                <div className="model-right">
+                {/* <div className="model-right">
                     <div className="model-canvas">
                         <Canvas camera={{ position: [0, 1, 5], fov: 45 }}>
                         <ambientLight intensity={0.5} />
@@ -158,7 +158,7 @@ const AnswerVideo = ({remoteStream, localStream,peerConnection,
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> */}
             </div>
         </div>
     )
