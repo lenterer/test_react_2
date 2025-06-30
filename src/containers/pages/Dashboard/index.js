@@ -183,7 +183,7 @@ const Dashboard = ({callStatus,updateCallStatus,setLocalStream,
                 )}
 
                 {/* Kolom kanan */}
-                <div className="model-right">
+                {/* <div className="model-right">
                     <div className="model-canvas">
                         <Canvas camera={{ position: [0, 1, 5], fov: 45 }}>
                         <ambientLight intensity={0.5} />
@@ -208,7 +208,7 @@ const Dashboard = ({callStatus,updateCallStatus,setLocalStream,
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> */}
             </div>
         </div>
     )
