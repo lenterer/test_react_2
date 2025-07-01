@@ -32,9 +32,9 @@ export default function Model({ scale = [0.7, 0.7, 0.7], rotationData }) {
                 }else if(boneName === 'Bone002'){
                     bone.rotation.x = rad(0) + angleRad;
                 }else if(boneName === 'Bone003'){
-                    bone.rotation.z = rad(50) + angleRad;
+                    bone.rotation.z = rad(50) + angleRad/6;
                 }else if(boneName === 'Bone004'){
-                    bone.rotation.z = rad(90) + angleRad;
+                    bone.rotation.z = rad(90) + angleRad/10;
                 }else if(boneName === 'Bone005'){
                     bone.rotation.z = rad(90) + angleRad;
                 }
