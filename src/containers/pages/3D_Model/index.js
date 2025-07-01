@@ -1,107 +1,100 @@
-import React, { Component } from "react";
-import './3DModel.scss';
-import ArmRobot from '../../../assets/3D_Model/ArmRobot.glb';
+import { useEffect } from 'react'
+import { useState } from 'react'
+import { useSearchParams, useNavigate } from 'react-router-dom';
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
 import Model from '../../../components/atoms/Model';
-import mqttService from '../../../config/mqtt'
+import mqttService from '../../../config/mqtt';
+import './3DModel.scss'
 
-class Model3D extends Component {
-    constructor(props){
-        super(props);
-        this.state = {
-            message: '0',
-            bone: {
-                Bone001: '0',
-                Bone002: '0',
-                Bone003: '0',
-                Bone004: '0',
-                Bone005: '0',
-                Bone006: '0',
-            },
-            incoming: {
-                text: '',
-                time: ''
-            },
-            connected: false,
+const Model3D = ({callStatus,updateCallStatus,setLocalStream,
+    setRemoteStream,remoteStream,peerConnection,setPeerConnection,
+    localStream,userName, setUserName,offerData,setOfferData})=>{
+
+    const [ typeOfCall, setTypeOfCall ] = useState()
+    const [joined, setJoined] = useState(false)
+    const [availableCalls, setAvailableCalls] = useState([])
+    const navigate = useNavigate();
+
+    const [message, setMessage] = useState('0');
+    const [bone, setBone] = useState({
+        Bone001: '0',
+        Bone002: '0',
+        Bone003: '0',
+        Bone004: '0',
+        Bone005: '0',
+        Bone006: '0',
+    });
+    const [connected, setConnected] = useState(false);
+
+    // Handle MQTT connect/disconnect (seperti componentDidMount / WillUnmount)
+    useEffect(() => {
+        mqttService.connect(handleMessage, (status) => {
+            setConnected(status);
+        });
+
+        return () => {
+            mqttService.disconnect();
         };
-    }
+    }, []);
 
-    componentDidMount(){
-        // TOPIC = test/ESP32
-        mqttService.connect(
-            this.handleMessage, 
-            (status) => {
-                this.setState({ connected: status });
-            } 
-        );
-    }
-
-    componentWillUnmount(){
-        mqttService.disconnect();
-    }
-
-    handleMessage = (topic, payload) => {
+    // Handler untuk menerima pesan dari MQTT
+    const handleMessage = (topic, payload) => {
         const now = new Date();
         const timeMessage = now.toLocaleTimeString();
+        const [boneName, angleDeg] = payload.split(':');
+        const boneMap = {
+            '1': 'Bone001',
+            '2': 'Bone002',
+            '3': 'Bone003',
+            '4': 'Bone004',
+            '5': 'Bone005'
+        };
 
-        let [boneIndex, angleDeg] = payload.split(':');
-
-        // Pastikan boneIndex adalah angka antara 0 dan 6
-        if (boneIndex >= "0" && boneIndex <= "6") {
-            const boneName = `Bone00${boneIndex}`;
-            this.setState((prevState) => ({
-                message: payload,
-                bone: {
-                    ...prevState.bone,
-                    [boneName]: angleDeg
-                },
-                //message: `${boneName}:${angleDeg}`
-            }));
-        }else {
-            this.setState((prevState) => ({
-                message: payload,
+        if (boneMap[boneName]) {
+            setMessage(`${boneMap[boneName]}:${angleDeg}`);
+            setBone(prev => ({
+                ...prev,
+                [boneMap[boneName]]: angleDeg
             }));
         }
     };
 
-    handleChange = (e) => {
-        this.setState({
-            [e.target.id]: e.target.value,
-        });
-    };
-
-    render() {
-        const { message, incoming, connected } = this.state;
-
-        return (
-            <div className="model3d-page">
-                <h1 className="model-title">Robot Arm 3D Viewer</h1>
-                <p>Status: {connected ? 'Connected' : 'Disconnected'}</p>
-
-                <div className="model-content">
+    return (
+        <div className="container">
+            <h1 className="model-title">Robot Arm 3D Viewer</h1>
+            <p>Status: {connected ? 'Connected' : 'Disconnected'}</p>
+            <div className='row-content'>
+                {/* Kolom kanan */}
+                <div className="model-right">
                     <div className="model-canvas">
                         <Canvas camera={{ position: [0, 1, 5], fov: 45 }}>
-                            <ambientLight intensity={0.5} />
-                            <directionalLight position={[5, 5, 5]} />
-                            <Model rotationData={this.state.message} />
-                            <OrbitControls />
+                        <ambientLight intensity={0.5} />
+                        <directionalLight position={[5, 5, 5]} />
+                        <Model rotationData={message} />
+                        <OrbitControls />
                         </Canvas>
                     </div>
 
                     <div className="model-info">
                         <h2>Informasi Bagian</h2>
-                        <p>Base 1 : {this.state.bone.Bone001}°</p>
-                        <p>Base 2 : {this.state.bone.Bone002}°</p>
-                        <p>Base 3 : {this.state.bone.Bone003}°</p>
-                        <p>Base 4 : {this.state.bone.Bone004}°</p>
-                        <p>Base 5 : {this.state.bone.Bone005}°</p>
-                        <p>Base 6 : {this.state.bone.Bone006}°</p>
+                        <div className="model-info-grid">
+                            <div className="info-row">
+                                <p>Base 1 : {bone.Bone001}°</p>
+                                <p>Base 2 : {bone.Bone002}°</p>
+                                <p>Base 3 : {bone.Bone003}°</p>
+                            </div>
+                            <div className="info-row">
+                                <p>Base 4 : {bone.Bone004}°</p>
+                                <p>Base 5 : {bone.Bone005}°</p>
+                                <p>Base 6 : {bone.Bone006}°</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-        );
-    }
+        </div>
+    )
 }
 
-export default Model3D;
+export default Model3D
