@@ -51,7 +51,7 @@ const AnswerVideo = ({remoteStream, localStream,peerConnection,
             [boneName]: angleDeg
         }));
     };
-    
+
     //send back to home if no localStream
     useEffect(()=>{
         if(!localStream){
@@ -105,7 +105,7 @@ const AnswerVideo = ({remoteStream, localStream,peerConnection,
             addOfferAndCreateAnswerAsync()
         }
     },[callStatus.videoEnabled,answerCreated])
-    
+
 
     //
     const shareVideo = async()=>{
