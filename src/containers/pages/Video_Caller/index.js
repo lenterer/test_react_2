@@ -29,15 +29,15 @@ const CallerVideo = ({remoteStream, localStream,peerConnection,callStatus,update
     const [connected, setConnected] = useState(false);
 
     // Handle MQTT connect/disconnect (seperti componentDidMount / WillUnmount)
-    // useEffect(() => {
-    //     mqttService.connect(handleMessage, (status) => {
-    //         setConnected(status);
-    //     });
+    useEffect(() => {
+        mqttService.connect(handleMessage, (status) => {
+            setConnected(status);
+        });
 
-    //     return () => {
-    //         mqttService.disconnect();
-    //     };
-    // }, []);
+        return () => {
+            mqttService.disconnect();
+        };
+    }, []);
 
     // Handler untuk menerima pesan dari MQTT
     const handleMessage = (topic, payload) => {
@@ -137,7 +137,7 @@ const CallerVideo = ({remoteStream, localStream,peerConnection,callStatus,update
                     />
                 </div>
 
-                {/* <div className="model-right">
+                <div className="model-right">
                     <div className="model-canvas">
                         <Canvas camera={{ position: [0, 1, 5], fov: 45 }}>
                         <ambientLight intensity={0.5} />
@@ -162,7 +162,7 @@ const CallerVideo = ({remoteStream, localStream,peerConnection,callStatus,update
                             </div>
                         </div>
                     </div>
-                </div> */}
+                </div>
             </div>
         </div>
     )
